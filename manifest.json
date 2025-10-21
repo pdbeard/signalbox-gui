@@ -1,0 +1,7 @@
+{
+  "name": "Signalbox GUI",
+  "description": "A Quickshell GUI interface for the Signalbox script management system",
+  "author": "pdbeard",
+  "version": "0.1.0",
+  "entry": "Shell.qml"
+}
