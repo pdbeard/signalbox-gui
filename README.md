@@ -436,6 +436,7 @@ Copyright (c) 2025 pdbeard
 ## Links
 
 - [Signalbox Repository](https://github.com/pdbeard/signalbox)
+- [Signalbox GUI Repository](https://github.com/pdbeard/signalbox-gui)
 - [Quickshell Documentation](https://quickshell.outfoxxed.me/)
 - [Catppuccin Theme](https://github.com/catppuccin/catppuccin)
 
