@@ -20,4 +20,5 @@ if [ ! -x "signalbox_backend.py" ]; then
 fi
 
 # Launch
-exec quickshell -c .
+# exec quickshell -c .
+exec quickshell -p Shell.qml -v

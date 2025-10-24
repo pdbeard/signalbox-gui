@@ -73,7 +73,7 @@ else
     echo -e "${YELLOW}⚠ No requirements.txt found${NC}"
 fi
 
-cd ../quickshell
+cd ../signalbox-gui
 
 # Make backend executable
 echo ""

@@ -10,25 +10,42 @@ ShellRoot {
     // Backend process to communicate with signalbox
     Process {
         id: signalboxBackend
+
+        // Enable stdin for communication
+        stdinEnabled: true
+
+        // Command to execute the backend script
         command: ["python3", Qt.resolvedUrl("signalbox_backend.py").toString().replace("file://", "")]
+
+        // Set the working directory to the backend script's location
+        workingDirectory: "../signalbox-gui"
+
+        // Automatically start the process
         running: true
-        
+
+        // Example of writing to stdin
+        Component.onCompleted: {
+            signalboxBackend.write(JSON.stringify({ command: "list" }) + "\n");
+        }
+
+        // Restart the process if it stops
+        onRunningChanged: if (!running) running = true
+
         property var pendingCallbacks: ({})
         property int requestId: 0
-        
+
         function callCommand(command, args, callback) {
             const id = requestId++
             pendingCallbacks[id] = callback
-            
+
             const request = {
                 id: id,
                 command: command,
                 args: args
             }
-            
-            stdin.write(JSON.stringify(request) + "\n")
-        }
-        
+
+            signalboxBackend.write(JSON.stringify(request) + "\n")
+}
         stdout: SplitParser {
             onRead: data => {
                 try {
@@ -43,20 +60,14 @@ ShellRoot {
                 }
             }
         }
-        
+
         stderr: SplitParser {
             onRead: data => console.error("Backend error:", data)
         }
     }
     
-    PanelWindow {
+    FloatingWindow {
         id: mainWindow
-        anchors {
-            top: true
-            bottom: true
-            left: true
-            right: true
-        }
         
         width: 1200
         height: 800
